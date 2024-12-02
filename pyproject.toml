@@ -16,7 +16,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-lint.select = ["E", "F"]
+lint.select = ["E", "F", "W", "I"]
 
 exclude = [
     "__pycache__",
