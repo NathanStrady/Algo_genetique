@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "algo-genetique"
+version = "0.1.0"
+description = ""
+authors = ["Nathan Strady <nathan.strady.tra@gmail.com>"]
+readme = "README.md"
+packages = [{include = "project"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+packages = [{include = "project"}]
