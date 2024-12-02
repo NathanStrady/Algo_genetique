@@ -8,8 +8,24 @@ packages = [{include = "project"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-
+ruff = "^0.8.1"
+matplotlib = "^3.9.3"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+lint.select = ["E", "F"]
+
+exclude = [
+    "__pycache__",
+    "*.pyc",
+    "*.egg-info",
+    "build/",
+    "dist/",
+]
+
+fix = false
+
+line-length = 100
