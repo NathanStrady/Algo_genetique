@@ -10,6 +10,7 @@ packages = [{include = "project"}]
 python = "^3.9"
 ruff = "^0.8.1"
 matplotlib = "^3.9.3"
+pre-commit = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core"]
