@@ -29,4 +29,4 @@ exclude = [
 
 fix = false
 
-line-length = 79
+line-length = 88
