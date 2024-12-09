@@ -2,7 +2,7 @@ class Graph:
     def __init__(self, vertices):
         self.vertices = vertices
         self.nbVertices = len(vertices)
-        self.matrix = [[0] * self.nbVertices for _ in range(self.nbVertices)]
+        self.matrix = [[float("inf")] * self.nbVertices for _ in range(self.nbVertices)]
 
     def add_edge(self, i, j, weight):
         if i >= len(self.vertices) and j >= len(self.vertices):
