@@ -1,17 +1,28 @@
-# This is a sample Python script.
-
-# Press Maj+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files,
-# tool windows, actions, and settings.
+import networkx as nx
+from matplotlib import pyplot as plt
+from project.graph import Graph
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f"Hi, {name}")  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    vertices = ['A', 'B', 'C', 'D', 'E']
+    graph = Graph(vertices)
+
+    graph.add_edge('A', 'B', 1)
+    graph.add_edge('A', 'C', 2)
+    graph.add_edge('B', 'C', 1)
+    graph.add_edge('B', 'D', 2)
+    graph.add_edge('C', 'E', 3)
+    graph.add_edge('D', 'E', 3)
+    graph.add_edge('A', 'D', 5)
+
+    nx_graph = graph.to_nx_graph()
+    plt.figure(figsize=(8, 6))
+    pos = nx.spring_layout(nx_graph)
+    nx.draw(nx_graph, pos, with_labels=True, node_size=500, node_color='skyblue', edge_color='gray', width=2, alpha=0.6)
+    edge_labels = nx.get_edge_attributes(nx_graph, 'weight')
+    nx.draw_networkx_edge_labels(nx_graph, pos, edge_labels=edge_labels)
+    plt.show()
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == "__main__":
-    print_hi("PyCharm")
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
