@@ -16,7 +16,7 @@ class NearestNeighbor:
 
         for i in range(self.n - 1):
             nearest_node = None
-            min_distance = float('inf')
+            min_distance = float("inf")
             for j in range(len(self.graph.matrix[i])):
                 if not visited[j] and self.graph.matrix[current_node][j] < min_distance:
                     nearest_node = j
@@ -30,5 +30,3 @@ class NearestNeighbor:
         distance += self.graph.matrix[current_node][start_index]
         path.append(start)
         return path, distance
-
-
