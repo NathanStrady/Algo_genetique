@@ -1,4 +1,6 @@
 import networkx as nx
+
+
 class Graph:
     INF = float("inf")
 
@@ -16,7 +18,8 @@ class Graph:
         graph_str = "  " + " ".join(str(v) for v in self.vertices) + "\n"
         for i in range(len(self.vertices)):
             graph_str += self.vertices[i] + " "
-            graph_str += " ".join('.' if self.matrix[i][j] == float('inf') else str(self.matrix[i][j]) for j in range(len(self.vertices))) + "\n"
+            graph_str += " ".join('.' if self.matrix[i][j] == float('inf') else str(self.matrix[i][j]) for j in
+                                  range(len(self.vertices))) + "\n"
         return graph_str
 
     def to_nx_graph(self):
@@ -28,7 +31,3 @@ class Graph:
                 if self.matrix[i][j] != self.INF:
                     G.add_edge(self.vertices[i], self.vertices[j], weight=self.matrix[i][j])
         return G
-
-
-
-

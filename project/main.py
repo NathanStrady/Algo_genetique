@@ -1,11 +1,13 @@
 import networkx as nx
 from matplotlib import pyplot as plt
 from project.graph import Graph
+from project.nearestNeighbor import NearestNeighbor
 
 
 def main():
     vertices = ['A', 'B', 'C', 'D', 'E']
     graph = Graph(vertices)
+
 
     graph.add_edge('A', 'B', 1)
     graph.add_edge('A', 'C', 2)
@@ -22,6 +24,11 @@ def main():
     edge_labels = nx.get_edge_attributes(nx_graph, 'weight')
     nx.draw_networkx_edge_labels(nx_graph, pos, edge_labels=edge_labels)
     plt.show()
+
+    nn = NearestNeighbor(graph)
+    path, total_distance = nn.linear_search(start="C")
+    print("\nChemin trouvé :", path)
+    print("Distance totale :", total_distance)
 
 
 if __name__ == "__main__":
