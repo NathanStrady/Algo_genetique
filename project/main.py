@@ -26,7 +26,7 @@ def main():
     plt.show()
 
     nn = NearestNeighbor(graph)
-    path, total_distance = nn.linear_search(start="C")
+    path, total_distance = nn.linear_search(start="E")
     print("\nChemin trouvé :", path)
     print("Distance totale :", total_distance)
 
