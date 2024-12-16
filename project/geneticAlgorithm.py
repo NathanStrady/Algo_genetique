@@ -6,7 +6,7 @@ class GeneticAlgorithm:
         self.graph = graph
         self.nearestNeighbor = nearestNeighbor
 
-    def generation(self, taille_pop):
+    def initialisation(self, taille_pop):
         pop = []
         for i in range(taille_pop):
             start_vertex = rd.choice(self.graph.vertices)

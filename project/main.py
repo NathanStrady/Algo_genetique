@@ -23,7 +23,7 @@ def main():
 
     nearestNeighbor = NearestNeighbor(graph)
     geneticAlgo = GeneticAlgorithm(graph, nearestNeighbor)
-    print(geneticAlgo.generation(10))
+    print(geneticAlgo.initialisation(10))
 
 if __name__ == "__main__":
     main()
