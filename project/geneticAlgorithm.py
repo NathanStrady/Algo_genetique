@@ -35,6 +35,25 @@ class GeneticAlgorithm:
             selected.append(population[winner])
         return selected
 
+    def ranking_selection(self, population, fitnesses, num_selections):
+        selected = []
+        currentPop = population
+        currentFit = fitnesses
+        for _ in range(num_selections):
+            bestNode = max(currentFit)
+            index = currentFit.index(bestNode)
+            selected.append(currentPop[index])
+            currentPop.pop(index)
+            currentFit.pop(index)
+        return len(selected)
+
+
+    def ga_ranking(self, taille_pop):
+        init= self.initialisation(taille_pop)
+        fitnesses = self.fitnesses(init)
+        selection = self.ranking_selection(init, fitnesses,len(init)//2)
+        return selection
+
     def crossover(self):
         return
 
