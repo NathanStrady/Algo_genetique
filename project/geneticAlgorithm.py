@@ -5,13 +5,13 @@ from project.nearestNeighbor import NearestNeighbor
 class GeneticAlgorithm:
     def __init__(self, graph):
         self.graph = graph
-        self.nearestNeighbor = NearestNeighbor(graph)
+        self.nearestNeighbor = NearestNeighbor()
 
     def initialisation(self, taille_pop):
         pop = []
         for i in range(taille_pop):
             start_vertex = rd.choice(self.graph.vertices)
-            pop.append(self.nearestNeighbor.linear_search(start_vertex))
+            pop.append(self.nearestNeighbor.linear_search(self.graph, start_vertex, rd.uniform(0.2, 0.9)))
         return pop
 
     def calculate_fitness(self, path):

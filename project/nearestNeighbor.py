@@ -1,27 +1,26 @@
+import random as rd
 class NearestNeighbor:
-    def __init__(self, graph):
-        self.graph = graph
-        self.n = len(graph.matrix)
 
-    def linear_search(self, start):
-        if start not in self.graph.vertices:
+    def linear_search(self, graph, start, p=0.5):
+        if start not in graph.vertices:
             raise ValueError(f"Sommet {start} pas dans le graphe.")
 
-        start_index = self.graph.vertices.index(start)
+        n = len(graph.vertices)
+        start_index = graph.vertices.index(start)
         path = [start]
-        visited = [False] * self.n
+        visited = [False] * n
         visited[start_index] = True
         current_node = start_index
-        distance = 0
 
-        for i in range(self.n - 1):
+        for i in range(n - 1):
             nearest_node = None
-            min_distance = float("inf")
-            for j in range(len(self.graph.matrix[i])):
-                if not visited[j] and self.graph.matrix[current_node][j] < min_distance:
-                    nearest_node = j
-                    min_distance = self.graph.matrix[current_node][j]
-            path.append(self.graph.vertices[nearest_node])
+            candidates = [j for j in range(len(graph.matrix[current_node])) if not visited[j]]
+            if candidates:
+                if rd.random() < p:
+                    nearest_node = rd.choice(candidates)
+                else:
+                    nearest_node = min(candidates, key=lambda x: graph.matrix[current_node][x])
+            path.append(graph.vertices[nearest_node])
             visited[nearest_node] = True
             current_node = nearest_node
 

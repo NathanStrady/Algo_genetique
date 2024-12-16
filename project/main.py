@@ -28,7 +28,7 @@ def main():
     graph = Graph.generate_random_graph(10, 5)
     plot_graph(graph)
     GA = GeneticAlgorithm(graph)
-    print(GA.ga_tournament(50))
+    print(GA.ga_tournament(25))
 
 
 if __name__ == "__main__":
