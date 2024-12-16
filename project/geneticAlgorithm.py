@@ -20,17 +20,29 @@ class GeneticAlgorithm:
             u, v = self.graph.vertices.index(path[i]), self.graph.vertices.index(path[i+1])
             total += self.graph.matrix[u][v]
         return 1/total
+
+    def fitnesses(self, pop):
+        fitness = []
+        for i in range(len(pop)):
+            fitness.append(self.calculate_fitness(pop[i]))
+        return fitness
+
+    def tournament_selection(self, population, fitnesses, k, num_selections):
+        selected = []
+        for _ in range(num_selections):
+            tournament = rd.sample(range(len(population)), k)
+            winner = max(tournament, key=lambda i: fitnesses[i])
+            selected.append(population[winner])
+        return selected
+
     def crossover(self):
         return
 
     def mutation(self):
         return
 
-    def tournament_selection(self):
-        return
-
-
     def ga_tournament(self, taille_pop):
         init = self.initialisation(taille_pop)
-        print(self.calculate_fitness(init[0][0]))
+        fitnesses = self.fitnesses(init)
+        selection = self.tournament_selection(init, fitnesses, 2, len(init)//2)
         return init

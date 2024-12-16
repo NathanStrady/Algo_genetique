@@ -21,12 +21,9 @@ class NearestNeighbor:
                 if not visited[j] and self.graph.matrix[current_node][j] < min_distance:
                     nearest_node = j
                     min_distance = self.graph.matrix[current_node][j]
-
             path.append(self.graph.vertices[nearest_node])
             visited[nearest_node] = True
-            distance += min_distance
             current_node = nearest_node
 
-        distance += self.graph.matrix[current_node][start_index]
         path.append(start)
-        return path, distance
+        return path
