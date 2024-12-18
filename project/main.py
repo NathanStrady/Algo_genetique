@@ -10,7 +10,7 @@ def plot_graph(graph):
     pos = nx.spring_layout(nx_graph, k=10, iterations=50)
 
     plt.figure(figsize=(15, 10))
-    plt.title("Graph Visualization")
+    plt.title("Exemple de graphe")
     nx.draw(
         nx_graph,
         pos,
@@ -25,10 +25,10 @@ def plot_graph(graph):
     plt.show()
 
 def main():
-    graph = Graph.generate_random_graph(10, 5)
+    graph = Graph.generate_random_graph(100, 10)
     plot_graph(graph)
     GA = GeneticAlgorithm(graph)
-    print(GA.ga_tournament(25))
+    GA.ga_tournament_random_search(500, 200)
 
 
 if __name__ == "__main__":
