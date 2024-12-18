@@ -1,6 +1,6 @@
 import random as rd
 import time
-from project.drawing import plot_best_path
+from project.Utils.drawing import plot_best_path
 from project.nearestNeighbor import NearestNeighbor
 
 
