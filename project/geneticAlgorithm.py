@@ -1,4 +1,6 @@
 import random as rd
+import time
+from project.drawing import plot_best_path
 from project.nearestNeighbor import NearestNeighbor
 
 
@@ -40,6 +42,7 @@ class GeneticAlgorithm:
     def best_path(self, population, fitnesses):
         best_index = fitnesses.index(max(fitnesses))
         return population[best_index], best_index
+
     def tournament_selection(self, population, fitnesses, k):
         tournament = rd.sample(range(len(population)), k)
         winner = max(tournament, key=lambda i: fitnesses[i])
@@ -55,7 +58,7 @@ class GeneticAlgorithm:
             selected.append(currentPop[index])
             currentPop.pop(index)
             currentFit.pop(index)
-        return len(selected)
+        return selected
 
     def cycle_crossover(self, p1, p2):
         c1 = ['-'] * len(p1)
@@ -94,8 +97,11 @@ class GeneticAlgorithm:
         path[i], path[j] = path[j], path[i]
         return path
 
+
+
     def ga_tournament_linear_search(self, nb_pop, nb_generation):
         best = None
+        G = self.graph.to_nx_graph()
         population = self.initialisation_linear_search(nb_pop)
         fitnesses = self.fitnesses(population)
         for gen in range(nb_generation):
@@ -111,12 +117,13 @@ class GeneticAlgorithm:
             fitnesses = self.fitnesses(population)
             best = self.best_path(population, fitnesses)
             print(f"Generation {gen + 1}: Best path fitness = {fitnesses[best[1]]} Path: {best[0]}")
-
+            plot_best_path(G, gen, best[0])
+            time.sleep(5)
         return best
-
 
     def ga_tournament_random_search(self, nb_pop, nb_generation):
         best = None
+        G = self.graph.to_nx_graph()
         population = self.initialisation_random_search(nb_pop)
         fitnesses = self.fitnesses(population)
         for gen in range(nb_generation):
@@ -132,14 +139,12 @@ class GeneticAlgorithm:
             fitnesses = self.fitnesses(population)
             best = self.best_path(population, fitnesses)
             print(f"Generation {gen + 1}: Best path fitness = {fitnesses[best[1]]} Path: {best[0]}")
-
+            plot_best_path(G, gen, best[0])
+            time.sleep(1)
         return best
-
 
     def ga_ranking(self, taille_pop):
         init = self.initialisation(taille_pop)
         fitnesses = self.fitnesses(init)
         selection = self.ranking_selection(init, fitnesses, len(init) // 2)
         return selection
-
-
