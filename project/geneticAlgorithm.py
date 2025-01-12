@@ -1,6 +1,5 @@
 import random as rd
 import time
-from project.Utils.drawing import plot_best_path
 from project.nearestNeighbor import NearestNeighbor
 
 
@@ -101,7 +100,7 @@ class GeneticAlgorithm:
 
     def ga_tournament_linear_search(self, nb_pop, nb_generation):
         best = None
-        G = self.graph.to_nx_graph()
+        # G = self.graph.to_nx_graph()
         population = self.initialisation_linear_search(nb_pop)
         fitnesses = self.fitnesses(population)
         for gen in range(nb_generation):
@@ -117,13 +116,13 @@ class GeneticAlgorithm:
             fitnesses = self.fitnesses(population)
             best = self.best_path(population, fitnesses)
             print(f"Generation {gen + 1}: Best path fitness = {fitnesses[best[1]]} Path: {best[0]}")
-            plot_best_path(G, gen, best[0])
-            time.sleep(5)
+            # plot_best_path(G, gen, best[0])
+            # time.sleep(5)
         return best
 
     def ga_tournament_random_search(self, nb_pop, nb_generation):
         best = None
-        G = self.graph.to_nx_graph()
+        # G = self.graph.to_nx_graph()
         population = self.initialisation_random_search(nb_pop)
         fitnesses = self.fitnesses(population)
         for gen in range(nb_generation):
@@ -139,8 +138,8 @@ class GeneticAlgorithm:
             fitnesses = self.fitnesses(population)
             best = self.best_path(population, fitnesses)
             print(f"Generation {gen + 1}: Best path fitness = {fitnesses[best[1]]} Path: {best[0]}")
-            plot_best_path(G, gen, best[0])
-            time.sleep(1)
+            # plot_best_path(G, gen, best[0])
+            # time.sleep(1)
         return best
 
     def ga_ranking(self, taille_pop):

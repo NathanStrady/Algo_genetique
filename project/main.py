@@ -1,10 +1,10 @@
-import networkx as nx
-from project.graph import Graph
-from project.geneticAlgorithm import GeneticAlgorithm
+
+
+from project.ui.MainWindow import MainWindow
+
 
 import sys
 from PyQt6.QtWidgets import QApplication
-from project.GUi.MainWindow import MainWindow
 
 def start_app():
     app = QApplication(sys.argv)
@@ -14,9 +14,6 @@ def start_app():
 
 
 def main():
-    # graph = Graph.generate_random_graph(15, 100)
-    # GA = GeneticAlgorithm(graph)
-    # GA.ga_tournament_random_search(50, 50)
     start_app()
 
 
