@@ -1,5 +1,8 @@
 import random as rd
 import time
+
+from PyQt6.uic.properties import QtCore
+
 from project.nearestNeighbor import NearestNeighbor
 
 
@@ -40,12 +43,15 @@ class GeneticAlgorithm:
 
     def best_path(self, population, fitnesses):
         best_index = fitnesses.index(max(fitnesses))
-        return population[best_index], best_index
+        return population[best_index], fitnesses[best_index]
 
-    def tournament_selection(self, population, fitnesses, k):
-        tournament = rd.sample(range(len(population)), k)
-        winner = max(tournament, key=lambda i: fitnesses[i])
-        return population[winner]
+    def tournament_selection(self, population, fitnesses, k, num_parents):
+        selected_parents = []
+        for _ in range(num_parents):
+            tournament = rd.sample(range(len(population)), k)
+            winner = max(tournament, key=lambda i: fitnesses[i])
+            selected_parents.append(population[winner])
+        return selected_parents
 
     def ranking_selection(self, population, fitnesses, num_selections):
         selected = []
@@ -96,18 +102,18 @@ class GeneticAlgorithm:
         path[i], path[j] = path[j], path[i]
         return path
 
-
-
-    def ga_tournament_linear_search(self, nb_pop, nb_generation):
+    def ga_tournament_linear_search(self, nb_pop, nb_generation, update_display_callback):
         best = None
-        # G = self.graph.to_nx_graph()
+        print("Glouton")
         population = self.initialisation_linear_search(nb_pop)
         fitnesses = self.fitnesses(population)
+        best_fitnesses = []
         for gen in range(nb_generation):
             new_population = []
+            selected_parents = self.tournament_selection(population, fitnesses, k=4, num_parents=nb_pop // 2)
             while len(new_population) < nb_pop:
-                p1 = self.tournament_selection(population, fitnesses, 4)
-                p2 = self.tournament_selection(population, fitnesses, 4)
+                p1 = rd.choice(selected_parents)
+                p2 = rd.choice(selected_parents)
                 c1, c2 = self.cycle_crossover(p1, p2)
                 c1 = self.mutation(c1)
                 c2 = self.mutation(c2)
@@ -115,21 +121,23 @@ class GeneticAlgorithm:
             population = new_population
             fitnesses = self.fitnesses(population)
             best = self.best_path(population, fitnesses)
-            print(f"Generation {gen + 1}: Best path fitness = {fitnesses[best[1]]} Path: {best[0]}")
-            # plot_best_path(G, gen, best[0])
-            # time.sleep(5)
+            best_fitnesses.append(best[1])
+            # print(f"Generation {gen + 1}: Best path fitness = {best[1]} Path: {best[0]}")
+        update_display_callback(self.graph.to_nx_graph(), nb_generation, best[0], best_fitnesses)
         return best
 
-    def ga_tournament_random_search(self, nb_pop, nb_generation):
+    def ga_tournament_random_search(self, nb_pop, nb_generation, update_display_callback):
         best = None
-        # G = self.graph.to_nx_graph()
+        print("Random Search")
         population = self.initialisation_random_search(nb_pop)
         fitnesses = self.fitnesses(population)
+        best_fitnesses = []
         for gen in range(nb_generation):
             new_population = []
+            selected_parents = self.tournament_selection(population, fitnesses, k=4, num_parents=nb_pop // 2)
             while len(new_population) < nb_pop:
-                p1 = self.tournament_selection(population, fitnesses, 4)
-                p2 = self.tournament_selection(population, fitnesses, 4)
+                p1 = rd.choice(selected_parents)
+                p2 = rd.choice(selected_parents)
                 c1, c2 = self.cycle_crossover(p1, p2)
                 c1 = self.mutation(c1)
                 c2 = self.mutation(c2)
@@ -137,13 +145,19 @@ class GeneticAlgorithm:
             population = new_population
             fitnesses = self.fitnesses(population)
             best = self.best_path(population, fitnesses)
-            print(f"Generation {gen + 1}: Best path fitness = {fitnesses[best[1]]} Path: {best[0]}")
-            # plot_best_path(G, gen, best[0])
-            # time.sleep(1)
+            best_fitnesses.append(best[1])
+            # print(f"Generation {gen + 1}: Best path fitness = {best[1]} Path: {best[0]}")
+        update_display_callback(self.graph.to_nx_graph(), nb_generation, best[0], best_fitnesses)
         return best
 
-    def ga_ranking(self, taille_pop):
-        init = self.initialisation(taille_pop)
+    def ga_ranking_linear_search(self, taille_pop):
+        init = self.initialisation_linear_search(taille_pop)
+        fitnesses = self.fitnesses(init)
+        selection = self.ranking_selection(init, fitnesses, len(init) // 2)
+        return selection
+
+    def ga_ranking_random_search(self, taille_pop):
+        init = self.initialisation_linear_search(taille_pop)
         fitnesses = self.fitnesses(init)
         selection = self.ranking_selection(init, fitnesses, len(init) // 2)
         return selection

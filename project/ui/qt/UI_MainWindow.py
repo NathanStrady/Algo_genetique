@@ -26,6 +26,8 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_7.addWidget(self.label_2)
         self.spinBox_2 = QtWidgets.QSpinBox(parent=self.centralwidget)
+        self.spinBox_2.setMinimum(1)
+        self.spinBox_2.setMaximum(1000)
         self.spinBox_2.setObjectName("spinBox_2")
         self.horizontalLayout_7.addWidget(self.spinBox_2)
         self.horizontalLayout_9.addLayout(self.horizontalLayout_7)
@@ -35,6 +37,8 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_8.addWidget(self.label_3)
         self.spinBox_3 = QtWidgets.QSpinBox(parent=self.centralwidget)
+        self.spinBox_3.setMinimum(1)
+        self.spinBox_3.setMaximum(1000)
         self.spinBox_3.setObjectName("spinBox_3")
         self.horizontalLayout_8.addWidget(self.spinBox_3)
         self.horizontalLayout_9.addLayout(self.horizontalLayout_8)
@@ -122,22 +126,18 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Lancer"))
 
     def on_button_click(self):
-        print("Button clicked!")
+        self.open_matplotlib_dialog()
+
+    def open_matplotlib_dialog(self):
         num_generations = self.spinBox.value()
         num_individuals = self.nombreDeGNRationSpinBox.value()
         strategy = self.choixDeLaStratGieComboBox.currentText()
         strategy_init = self.choixDeLaStratGieDeGNRationDeDPartComboBox.currentText()
+        nb_nodes = self.spinBox_2.value()
+        nb_max_weight = self.spinBox_3.value()
 
-        print(f"Number of Generations: {num_generations}")
-        print(f"Number of Individuals per Generation: {num_individuals}")
-        print(f"Selected Strategy: {strategy}")
-        print(f"Initialization Strategy: {strategy_init}")
-
-        self.open_matplotlib_dialog()
-
-    def open_matplotlib_dialog(self):
         self.dialog = QtWidgets.QDialog()
         self.dialog_ui = Ui_Dialog()
         self.dialog_ui.setupUi(self.dialog)
-
+        self.dialog_ui.configure(nb_nodes, nb_max_weight, num_generations, num_individuals, strategy, strategy_init)
         self.dialog.exec()
