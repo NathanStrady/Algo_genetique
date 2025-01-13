@@ -51,10 +51,6 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "Statistiques TSP"))
 
     def configure(self, nb_nodes, nb_max_weight, num_generations, num_individuals, strategy, strategy_init):
-        # Assurez-vous que les paramètres sont valides
-        if nb_nodes <= 0 or nb_max_weight <= 0 or num_generations <= 0 or num_individuals <= 0:
-            raise ValueError("Les paramètres doivent être positifs et non nuls.")
-
         self.num_generations = num_generations
         self.num_individuals = num_individuals
         self.strategy = strategy
@@ -66,15 +62,49 @@ class Ui_Dialog(object):
         self.startGA()
 
     def startGA(self):
-        GA = GeneticAlgorithm(self.G)
-        if (self.strategy_init == "Aléatoire"):
-            best = GA.ga_tournament_random_search(self.num_individuals, self.num_generations,
-                                              self.update_display_at_generation)
-        else:
-            best = GA.ga_tournament_linear_search(self.num_individuals, self.num_generations,
-                                              self.update_display_at_generation)
+        try:
+            GA = GeneticAlgorithm(self.G)
+            if self.strategy == "Tournois par sélection":
+                try:
+                    if self.strategy_init == "Aléatoire":
+                        best = GA.ga_tournament_random_search(
+                            self.num_individuals,
+                            self.num_generations,
+                            self.update_display_at_generation
+                        )
+                    else:
+                        best = GA.ga_tournament_linear_search(
+                            self.num_individuals,
+                            self.num_generations,
+                            self.update_display_at_generation
+                        )
+                except Exception as e:
+                    print(f"Error during tournament strategy execution: {e}")
+                    best = None
+            else:
+                print("Tournois par rang")
+                try:
+                    if self.strategy_init == "Aléatoire":
+                        best = GA.ga_ranking_random_search(
+                            self.num_individuals,
+                            self.num_generations,
+                            self.update_display_at_generation
+                        )
+                    else:
+                        best = GA.ga_ranking_linear_search(
+                            self.num_individuals,
+                            self.num_generations,
+                            self.update_display_at_generation
+                        )
+                except Exception as e:
+                    print(f"Error during ranking strategy execution: {e}")
+                    best = None
+            return best
+        except Exception as e:
+            print(f"Error initializing GeneticAlgorithm or starting the GA process: {e}")
+            return None
 
-    def update_display_at_generation(self, G, generation, best_path, fitness):
+    def update_display_at_generation(self, G, generation, best_path, fitness, execution_time):
 
         self.plot_best_path(G, generation, best_path, self.graphicsView)
         self.plot_fitness(fitness, self.graphicsView_2)
@@ -82,10 +112,12 @@ class Ui_Dialog(object):
         strategy_info = f"Séléction: {self.strategy} / Initialisation: {self.strategy_init}"
         generation_info = f"Génération: {generation} / Nb Individus par génération: {self.num_individuals}"
         fitness_info = f"Résultat: {fitness[-1] if len(fitness) > 0 else 'N/A'}"
+        execution_time_info = f"Execution time: {execution_time:.2f}"
 
         stats_text = (f"{generation_info}\n"
                       f"{strategy_info}\n"
-                      f"{fitness_info}\n")
+                      f"{fitness_info}\n"
+                      f"{execution_time_info}\n")
 
 
         self.label.setText(stats_text)
