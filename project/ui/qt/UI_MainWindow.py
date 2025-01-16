@@ -121,8 +121,8 @@ class Ui_MainWindow(object):
         self.choixDeLaStratGieDeGNRationDeDPartComboBox.setItemText(0, _translate("MainWindow", "Aléatoire"))
         self.choixDeLaStratGieDeGNRationDeDPartComboBox.setItemText(1, _translate("MainWindow", "Algorithme Glouton du plus proche voisin"))
         self.choixDeLaStratGieLabel.setText(_translate("MainWindow", "Choix de la stratégie"))
-        self.choixDeLaStratGieComboBox.setItemText(0, _translate("MainWindow", "Tournois par sélection"))
-        self.choixDeLaStratGieComboBox.setItemText(1, _translate("MainWindow", "Tournois par rang"))
+        self.choixDeLaStratGieComboBox.setItemText(0, _translate("MainWindow", "Sélection par tournois"))
+        self.choixDeLaStratGieComboBox.setItemText(1, _translate("MainWindow", "Sélection par rang"))
         self.pushButton.setText(_translate("MainWindow", "Lancer"))
 
     def on_button_click(self):

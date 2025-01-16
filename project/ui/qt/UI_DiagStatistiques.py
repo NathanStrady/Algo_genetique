@@ -64,7 +64,7 @@ class Ui_Dialog(object):
     def startGA(self):
         try:
             GA = GeneticAlgorithm(self.G)
-            if self.strategy == "Tournois par sélection":
+            if self.strategy == "Sélection par tournois":
                 try:
                     if self.strategy_init == "Aléatoire":
                         best = GA.ga_tournament_random_search(
@@ -82,7 +82,6 @@ class Ui_Dialog(object):
                     print(f"Error during tournament strategy execution: {e}")
                     best = None
             else:
-                print("Tournois par rang")
                 try:
                     if self.strategy_init == "Aléatoire":
                         best = GA.ga_ranking_random_search(
