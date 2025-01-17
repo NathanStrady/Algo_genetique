@@ -34,3 +34,4 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 
 ### Autres remarques
 Le code source est également disponible. Pour l'exécuter, il suffit d'utiliser un IDE compatible avec Poetry (comme PyCharm ou VS Code avec l'extension Python) pour gérer les dépendances et exécuter le code facilement.
+Il existe aussi un exécutable à simplement lancer pour profiter du petit logiciel sur le TSP.
