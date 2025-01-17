@@ -7,7 +7,7 @@ Ce projet implémente un algorithme génétique permettant de résoudre le probl
 ### Pré-requis
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre système :
 - Python (version 3.13 recommandée)
-- Poetry (sur le lien suivant : ([https://python-poetry.org/docs/#installing-with-the-official-installer](https://python-poetry.org/docs/#installing-with-the-official-installer))
+- Poetry (Installer sur le lien suivant : ([https://python-poetry.org/docs/#installing-with-the-official-installer](https://python-poetry.org/docs/#installing-with-the-official-installer))
 
 ### Étapes d'installation
 1. **Téléchargement du projet :**
