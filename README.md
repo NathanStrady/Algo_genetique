@@ -23,7 +23,7 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
      ```
       
 5. **Exécution du projet :**
-   - Exécutez le fichier principal `main.py` avec l'une des commandes suivantes en fonction de la version de python que vous avez :
+   - Exécutez le fichier principal `main.py` avec l'une des commandes suivantes en fonction de l'emplacement où vous vous situez :
      ```bash
      poetry run python project/main.py
      ```
