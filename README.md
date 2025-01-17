@@ -6,7 +6,8 @@ Ce projet implémente un algorithme génétique permettant de résoudre le probl
 
 ### Pré-requis
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre système :
-- Python (version 3.x recommandée)
+- Python (version 3.13 recommandée)
+- Poetry (sur le lien suivant : ([https://python-poetry.org/docs/#installing-with-the-official-installer](https://python-poetry.org/docs/#installing-with-the-official-installer))
 
 ### Étapes d'installation
 1. **Téléchargement du projet :**
@@ -15,18 +16,21 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 2. **Extraction des fichiers :**
    - Extrayez les fichiers du dossier compressé
 
-3. **Exécution du projet :**
+3. **Installation des dépendances**
+   - Lancez la commandes suivantes dans la racine du projet
+     ```bash
+     poetry install
+     ```
+      
+5. **Exécution du projet :**
    - Exécutez le fichier principal `main.py` avec l'une des commandes suivantes en fonction de la version de python que vous avez :
      ```bash
-     python main.py
+     poetry run python project/main.py
      ```
-     ou
+     ou si vous êtes dans le dossier `project`
      ```bash
-     python3 main.py
+     poetry run python main.py
      ```
 
-### Autres remarques 
-Le code source est disponible. Pour l'exécuter, assurez-vous d'avoir installé **Poetry** avec votre IDE ou manuellement, afin de récupérer les packages nécessaires à son exécution. 
-
-Vous pouvez consulter le guide d'installation officiel de Poetry via le lien suivant :  
-[https://python-poetry.org/docs/#installing-with-the-official-installer](https://python-poetry.org/docs/#installing-with-the-official-installer)
+### Autres remarques
+Le code source est également disponible. Pour l'exécuter, il suffit d'utiliser un IDE compatible avec Poetry (comme PyCharm ou VS Code avec l'extension Python) pour gérer les dépendances et exécuter le code facilement.
